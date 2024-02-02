@@ -3,11 +3,13 @@
 #include <bitset>
 #include <sstream>
 #include <iomanip>
+#include <math.h>
 #pragma endregion
 
 #pragma region To multiply two fixed point numbers
 // Function to multiply two fixed-point numbers using shifting and addition
 unsigned int multiplyFixedPoint(unsigned int a, unsigned int b) {
+
     unsigned int result = 0;
     // Iterate through each bit of the second operand (b)
     for (int i = 0; i <= 31; i++) {
@@ -18,6 +20,7 @@ unsigned int multiplyFixedPoint(unsigned int a, unsigned int b) {
         }
     }
     return result;
+
 }
 #pragma endregion
 
@@ -57,8 +60,11 @@ int main(int argc, char *argv[]) {
     }
     else
     {
+        // Output the result in decimal format
+        std::cout << "Product in decimal value: 0." << result << std::endl;
         // Output the result in hexadecimal, preserving leading zeros
-        std::cout << "Product: 0x" << std::setfill('0') << std::setw(8) << std::hex << result << std::endl;
+        std::cout << "Product in Hex: 0x" << std::setfill('0') << std::setw(8) << std::hex << result << std::endl;
+        
     }
 
     return 0;
