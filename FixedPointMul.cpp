@@ -5,7 +5,6 @@
 #include <bitset>
 #include <sstream>
 #include <iomanip>
-#include <math.h>
 #include <cstdint>
 #pragma endregion
 
