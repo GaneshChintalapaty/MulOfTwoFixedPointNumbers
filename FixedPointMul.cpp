@@ -10,7 +10,7 @@
 
 #pragma region To multiply two fixed point numbers
 // Function to multiply two fixed-point numbers using shifting and addition
-uint32_t multiplyFixedPoint(uint32_t a, uint32_t b) 
+uint64_t multiplyFixedPoint(uint32_t a, uint32_t b) 
 {
 
     uint64_t result = 0;
@@ -25,8 +25,8 @@ uint32_t multiplyFixedPoint(uint32_t a, uint32_t b)
         }
     }
 
-    result >>= 32;
-    return (uint32_t)result;
+    //result >>= 32;
+    return result;
 
 }
 #pragma endregion
@@ -61,17 +61,20 @@ int main(int argc, char *argv[])
     ss.clear(); //Clear string stream
 
     // Multiply the numbers
-    uint32_t result = multiplyFixedPoint((uint32_t)num1, (uint32_t)num2);
+    uint64_t result = multiplyFixedPoint((uint32_t)num1, (uint32_t)num2);
+    uint32_t tmp = result >> 32;
 
     // Check for underflow
-    if (result == 0 && (num1 != 0 && num2 != 0)) 
+    if (tmp == 0 && (num1 != 0 && num2 != 0)) 
     {
         std::cout << "Warning: Potential underflow detected." << std::endl;
+        std::cout << "Product in Hex 64 bit: 0x" << std::setfill('0') << std::setw(16) << std::hex << result << std::endl;
     }
     else
     {
         // Output the result in hexadecimal, preserving leading zeros
-        std::cout << "Product in Hex: 0x" << std::setfill('0') << std::setw(8) << std::hex << result << std::endl;
+        std::cout << "Product in Hex 32 bit: 0x" << std::setfill('0') << std::setw(8) << std::hex << tmp << std::endl;
+        std::cout << "Product in Hex 64 bit: 0x" << std::setfill('0') << std::setw(16) << std::hex << result << std::endl;
         
     }
 
